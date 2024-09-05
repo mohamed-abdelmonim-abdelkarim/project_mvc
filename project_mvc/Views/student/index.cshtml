@@ -1,0 +1,161 @@
+﻿@model List<student>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Student List</title>
+    <link href="/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #f0f2f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .header {
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-create {
+            margin-bottom: 20px;
+            font-size: 1em;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+        }
+
+            .btn-create:hover {
+                background-color: #0056b3;
+            }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            background-color: #ffffff;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            }
+
+        .card-title {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .card-text {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .action-icons a {
+            margin-right: 10px;
+            font-size: 14px;
+            color: #ffffff;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+        }
+
+            .action-icons a:hover {
+                transform: scale(1.05);
+                opacity: 0.9;
+            }
+
+        .action-icons .btn-info {
+            background-color: #17a2b8;
+            border: none;
+        }
+
+        .action-icons .btn-warning {
+            background-color: #ffc107;
+            border: none;
+        }
+
+        .action-icons .btn-danger {
+            background-color: #dc3545;
+            border: none;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 50px;
+            font-size: 18px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">Student List</div>
+        <a asp-action="create" class="btn btn-create">
+            <i class="fa fa-plus"></i> Create New Student
+        </a>
+        <div class="row">
+            @if (Model.Count == 0)
+            {
+                <div class="col-12 no-data">
+                    No students available. Please add some students.
+                </div>
+            }
+            else
+            {
+                @foreach (var student in Model)
+                {
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card">
+                            <h5 class="card-title">@student.Name <small>(ID: @student.Id)</small></h5>
+                            <p class="card-text"><strong>Address:</strong> @student.address</p>
+                            <p class="card-text"><strong>Department ID:</strong> @student.dept_id</p>
+                            <p class="card-text"><strong>Email:</strong> @student.email</p>
+                            <div class="action-icons">
+                                <a asp-action="details" asp-route-id="@student.Id" class="btn btn-info">
+                                    <i class="fa fa-eye"></i> Details
+                                </a>
+                                <a asp-action="edit" asp-route-id="@student.Id" class="btn btn-warning">
+                                    <i class="fa fa-edit"></i> Edit
+                                </a>
+                                <a asp-action="delete" asp-route-id="@student.Id" class="btn btn-danger">
+                                    <i class="fa fa-trash"></i> Delete
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+

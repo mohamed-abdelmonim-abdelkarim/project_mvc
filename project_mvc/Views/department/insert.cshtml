@@ -1,0 +1,92 @@
+﻿@model department
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Add Department</title>
+    <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #f4f7f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+        }
+
+        .card {
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+        }
+
+        .card-header {
+            background-color: #007bff;
+            color: #ffffff;
+            border-bottom: 0;
+        }
+
+        .form-label {
+            font-weight: 500;
+        }
+
+        .form-control {
+            border-radius: 6px;
+            margin-bottom: 15px;
+            padding: 10px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            background-color: #007bff;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+            }
+
+        .text-danger {
+            font-size: 0.875em;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0">Add Department</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="insert" asp-controller="department" method="post">
+                    <div class="mb-3">
+                        <label asp-for="dept_Id" class="form-label">Department ID</label>
+                        <input asp-for="dept_Id" class="form-control" />
+                        <span asp-validation-for="dept_Id" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="dept_Name" class="form-label">Department Name</label>
+                        <input asp-for="dept_Name" class="form-control" />
+                        <span asp-validation-for="dept_Name" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+﻿@model List<department>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Departments Index</title>
+    <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #f4f7f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            margin: 30px auto;
+        }
+
+        .table th, .table td {
+            text-align: center;
+        }
+
+        .btn-custom {
+            margin: 2px;
+        }
+
+        .no-department {
+            text-align: center;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <a asp-action="show" asp-controller="department" class="btn btn-danger mb-3">Create New Department</a>
+        <a asp-action="Index" asp-controller="student" class="btn btn-primary mb-3">View Students</a> 
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Information</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!Model.Any())
+                    {
+                        <tr>
+                            <td colspan="5" class="no-department">No departments available</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.dept_Id</td>
+                                <td>@item.dept_Name</td>
+                                <td>
+                                    <a asp-action="display" asp-controller="department" asp-route-id="@item.dept_Id" class="btn btn-info btn-custom">Display</a>
+                                </td>
+                                <td>
+                                    <a asp-action="edit" asp-controller="department" asp-route-id="@item.dept_Id" class="btn btn-warning btn-custom">Edit</a>
+                                </td>
+                                <td>
+                                    <a onclick="return confirm('Are you sure you want to delete this department?')" asp-action="delete" asp-controller="department" asp-route-id="@item.dept_Id" class="btn btn-danger btn-custom">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
